@@ -1,0 +1,6 @@
+{
+    "port": 5000,
+    "profport": 5010,
+    "retry": 3,
+    "timeout": 15000
+}
