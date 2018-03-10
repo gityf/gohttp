@@ -1,11 +1,10 @@
-package context
+package global
 
 import (
 	"fmt"
 	"io"
 	"encoding/json"
-	logger "github.com/shengkehua/xlog4go"
-	"global"
+	logger "github.com/xlog4go"
 	"net/http"
 )
 
@@ -26,7 +25,7 @@ func DoResponse(result interface{}, w io.Writer) (n int, err error) {
 	if err != nil {
 		logger.Error("json.Marshal err:%v", err)
 		s1 = fmt.Sprintf("{\"errno\":%v,\"errmsg\":\"%v\"}",
-			global.ERR_JSON_MARSHAL_FAILED, err)
+			ERR_JSON_MARSHAL_FAILED, err)
 	}else{
 		s1 = string(resJson)
 	}

@@ -9,21 +9,20 @@ import (
 	"global"
 	"net/http"
 	"strings"
-	logger "github.com/shengkehua/xlog4go"
+	logger "github.com/xlog4go"
 	"os"
 	"io/ioutil"
-	"context"
 	"logic"
 )
 
 func FuncHandler(w http.ResponseWriter, r *http.Request, logId int64, messageType uint64) HttpResponser {
-	formData := &context.FormStruct{}
+	formData := &global.FormStruct{}
 	if err := ParseForm(Input(r), formData); err != nil {
 		return doErrorResponse("", global.ERR_HTTP_PARSE_FAILED, err.Error(), w)
 	}
 	logger.Warn("FormStruct: %v", formData)
 
-	msg := &context.Message{
+	msg := &global.Message{
 		LogId:       logId,
 		Writer:      w,
 		FormStruct: formData,
@@ -43,8 +42,8 @@ func StaticResource(w http.ResponseWriter, r *http.Request, logId int64, message
 	if path == "/" {
 		path = "/index.html"
 	}
-	var resp *context.BaseResponse
-	resp = context.NewBaseResponse()
+	var resp *global.BaseResponse
+	resp = global.NewBaseResponse()
 	if !strings.Contains(path, "/") {
 		w.Header().Set("content-type", "application/json; charset=utf-8")
 		resp.Errmsg = "Not Found."

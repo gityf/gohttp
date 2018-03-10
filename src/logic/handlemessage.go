@@ -1,8 +1,8 @@
 package logic
 
-import "context"
+import "global"
 
-func HandleMessage(msg *context.Message) (resp *context.BaseResponse) {
-	resp = context.NewBaseResponse()
+func HandleMessage(msg *global.Message) (resp *global.BaseResponse) {
+	resp = global.NewBaseResponse()
 	return
 }
